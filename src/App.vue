@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     Hot Dogs
-    <div><button onclick="add">Add new hot dog</button>
+    <div><button @click="add">Add new hot dog</button>
     </div>
     <HotDogsList :hotDogs="hotDogs"/>
-    <HotDogForm :hotDog="hotDog" :formMode="formMode" :formDialog="formDialog" @unshift="unshiftToArray" @edit="editInArr"/>
+    <HotDogForms :hotDog="hotDog" :formMode="formMode" :formDialog="formDialog" @unshift="unshiftToArray" @edit="editInArr"/>
 
             
   </div>
