@@ -2,8 +2,9 @@
     <div  id="app">
         <p>{{ hotdog.title }}</p>
         <div>
-            <button @click="editHotDog"></button>
-            <button @click="deleteFromArr"></button>
+            <button @click="deleteHotDog">Remove</button>
+            <button @click="editHotDog">Edit</button>
+            <input v-model="newTitle" type="text">
         </div>
     </div>
 </template>
@@ -12,29 +13,34 @@
     import axios from "axios";
 
     export default {
-        name: "HotDogsListItem",
+        name: "hotDogItem",
         props: {
-            hotdog: Object,
+            hotdog: '',
         },
-        inject: ["hotDogAction", "update", "deleteFromArr"],
+            inject: ["update"],
         data: () => ({
-            formDialog: false,
-            formMode: "editing",
+            newTitle:''
         }),
         methods: {
             async editHotDog() {
-                this.formDialog = true;
-                this.hotDogAction(this.hotdog, this.formMode, this.formDialog)
-            },
-            async deleteHotDog() {
-                let url = 'https://hot-dogs-ao.herokuapp.com/api/hotdog';
-                try {
-                    this.deleteFromArr(this.hotDog);
-                    await axios.delete(url, {data: {_id: this.hotdog._id}});
+                    if(this.newTitle===''){
+                        this.newTitle='Default hotdog name'
+                    }
+                    await axios.put('https://floating-woodland-55116.herokuapp.com/api/hotDog',{
+                        data:{
+                            title:this.newTitle,
+                            id: this.hotdog._id
+                        }
+                    });
                     this.update();
-                } catch (e) {
-                    alert(e.message);
-                }
+            },
+             async deleteHotDog() {
+                    await axios.delete('https://floating-woodland-55116.herokuapp.com/api/hotDog',{
+                        data:{
+                            id: this.hotdog._id
+                        }
+                    });
+                    this.update();
             }
         }
     }
@@ -49,5 +55,4 @@
   color: #1b9954;
   margin-top: 60px;
 }
-
 </style>

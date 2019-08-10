@@ -1,20 +1,20 @@
 <template>
  <div id="app"> 
-    <ul>
-        <li v-for="hotdog in hotDogs">
-            <HotDogsItem :hotDog="hotdog"></HotDogsItem>
+    <ul class="ul-style">
+        <li v-for="hotdog in hotDogs" :key="hotdog._id">
+            <hotDogItem :hotdog="hotdog" ></hotDogItem>
         </li>
     </ul>
  </div>
 </template>
 
 <script>
-    import HotDogsItem from "./hotDogItem";
+    import hotDogItem from "./hotDogItem";
 
     export default {
-        components: {HotDogsItem},
+        components: {hotDogItem},
         props: {
-            hotDogs: Array
+            hotDogs:''
         },
     };
 </script>
@@ -27,5 +27,7 @@
   color: #1b9954;
   margin-top: 60px;
 }
-
+.ul-style{
+    list-style: none;
+}
 </style>
