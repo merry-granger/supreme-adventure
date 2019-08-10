@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  id="app">
         <p>{{ hotdog.title }}</p>
         <div>
             <button @click="editHotDog"></button>
@@ -40,6 +40,14 @@
     }
 </script>
 
-<style scoped>
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #1b9954;
+  margin-top: 60px;
+}
 
 </style>
